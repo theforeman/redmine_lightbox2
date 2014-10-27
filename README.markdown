@@ -17,7 +17,21 @@ Screenshots
 Installation and Setup
 ----------------------
 
-1. Follow the Redmine plugin installation steps at http://www.redmine.org/wiki/redmine/Plugins
-2. Restart your Redmine web servers (e.g. mongrel, thin, passenger)
+* Clone or [download](https://github.com/paginagmbh/redmine_lightbox/releases) this repo into your **redmine_root/plugins/** folder
+```
+$ git clone https://github.com/paginagmbh/redmine_lightbox.git
+```
+* You have to run the plugin rake task to provide the assets (from the Redmine root directory):
+```
+$ rake redmine:plugins:migrate RAILS_ENV=production
+```
+* Restart redmine
 
-(The latest version only supports redmine 2.0.0+, for older version please download this package https://github.com/zipme/redmine_lightbox/zipball/7cd1d66d54f267015dcd0b0d0eadab251918de1d)
+Compatibility
+-------------
+
+The latest version only supports redmine 2.6.0+.
+
+A Redmine 2.0 - 2.5.x compatible version can be found in the `redmine-2.5-and-lower` branch.
+
+For older version please download this package https://github.com/zipme/redmine_lightbox/zipball/7cd1d66d54f267015dcd0b0d0eadab251918de1d)

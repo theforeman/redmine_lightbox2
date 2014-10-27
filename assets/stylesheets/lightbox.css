@@ -19,3 +19,7 @@ a.pdf img, a.swf img
   margin: 0 4px;
   width: 18px;
 }
+
+.fancybox-custom .fancybox-skin {
+	box-shadow: 0 0 50px #222;
+}
