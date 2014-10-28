@@ -9,7 +9,7 @@
   <%= h(" - #{attachment.description}") unless attachment.description.blank? %>
   <span class="size">(<%= number_to_human_size attachment.filesize %>)</span>
   <% if( attachment.filename =~ /.(pdf|swf)$/i ) %>
-    <%= link_to image_tag('preview.png', :plugin => :redmine_lightbox2), {:controller => 'attachments', :action => "#{$1 === 'swf' ? 'download_inline' : 'show'}", :id => attachment, :filename => attachment.filename }, :class => $1, :rel => 'attachments', :title => "#{attachment.filename}#{ ('-' + attachment.description) unless attachment.description.blank? }" %>
+    <%= link_to image_tag('preview.png', :plugin => :redmine_lightbox2), {:controller => 'attachments', :action => "#{$1 === 'swf' ? 'download_inline' : 'show'}", :id => attachment, :filename => attachment.filename }, :class => $1, :rel => 'attachments', :title => "#{attachment.filename}#{ ('-' + attachment.description) unless attachment.description.blank? }", :data  => {:fancybox_type => 'iframe'} %>
   <% end -%>
   <% if options[:deletable] %>
     <%= link_to image_tag('delete.png'), attachment_path(attachment),
