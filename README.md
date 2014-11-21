@@ -25,6 +25,7 @@ Installation and Setup
 ```
 $ git clone https://github.com/paginagmbh/redmine_lightbox2.git
 ```
+* If you downloaded a tarball / zip from master branch, make sure you rename the extracted folder to `redmine_lightbox2`
 * You have to run the plugin rake task to provide the assets (from the Redmine root directory):
 ```
 $ rake redmine:plugins:migrate RAILS_ENV=production
