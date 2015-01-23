@@ -2,11 +2,11 @@ module RedmineLightbox2
   module Hooks
     class ViewLayoutsBaseHtmlHeadHook < Redmine::Hook::ViewListener
       def view_layouts_base_html_head(context={})
-        if context[:controller] && (  context[:controller].is_a?(IssuesController) || 
+        if context[:controller] && (  context[:controller].is_a?(IssuesController) ||
                                       (Object.const_defined?('ContactsController') && context[:controller].is_a?(ContactsController)) ||
                                       context[:controller].is_a?(WikiController) ||
                                       context[:controller].is_a?(DocumentsController) ||
-                                      context[:controller].is_a?(FilesController) || 
+                                      context[:controller].is_a?(FilesController) ||
                                       context[:controller].is_a?(BoardsController) ||
                                       context[:controller].is_a?(NewsController))
           return stylesheet_link_tag("jquery.fancybox-2.1.5.css", :plugin => "redmine_lightbox2", :media => "screen") +
