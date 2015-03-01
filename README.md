@@ -23,11 +23,13 @@ For older version please download [this package](https://github.com/paginagmbh/r
 Installation and Setup
 ----------------------
 
-* Clone or [download](https://github.com/paginagmbh/redmine_lightbox2/releases) this repo into your **redmine_root/plugins/** folder
+* Clone or [download](https://github.com/paginagmbh/redmine_lightbox2/archive/redmine-2.6.zip) this repo into your **redmine_root/plugins/** folder
 ```
 $ git clone https://github.com/paginagmbh/redmine_lightbox2.git
+$ cd redmine_lightbox2
+$ git checkout redmine-2.6
 ```
-* If you downloaded a tarball / zip from master branch, make sure you rename the extracted folder to `redmine_lightbox2`
+* If you downloaded a tarball / zip from `redmine-2.6` branch, make sure you rename the extracted folder to `redmine_lightbox2`
 * You have to run the plugin rake task to provide the assets (from the Redmine root directory):
 ```
 $ rake redmine:plugins:migrate RAILS_ENV=production
