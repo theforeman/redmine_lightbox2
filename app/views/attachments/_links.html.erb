@@ -37,7 +37,7 @@
         <%=
           link_to image_tag(url_for(:controller => 'attachments', :action => 'thumbnail', :id => attachment)),
           {:controller => 'attachments', :action => 'show', :id => attachment, :filename => attachment.filename},
-          :class => 'lightbox', :rel => 'attachments', :title => "#{attachment.filename}#{ ('-' + attachment.description) unless attachment.description.blank? }"
+          :class => 'lightbox', :rel => 'attachments', :title => "#{attachment.filename}#{ ('-' + attachment.description) unless attachment.description.blank? }", :data  => {:fancybox_type => 'iframe'}
         %>
       </div>
     <% end %>
