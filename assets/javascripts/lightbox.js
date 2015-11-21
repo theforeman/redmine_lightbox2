@@ -16,7 +16,8 @@ $(document).ready(function() {
 	  "div.journal ul.details a[href$='.gif']," +
 	  "div.journal ul.details a[href$='.GIF']," +
 	  "div.journal a.thumbnail," +
-	  "div.attachments a.swf").fancybox({
+	  "div.attachments a.swf," +
+	  ".avatar a").fancybox({
 			prevEffect		: 'none',
 			nextEffect		: 'none',
 			openSpeed		: 400,
