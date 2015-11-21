@@ -41,15 +41,3 @@ License
 -------
 
 *redmine_lightbox2* plugin is developed under the [MIT License](LICENCE).
-
-
-Screenshots
------------
-
-![Screenshot 1](http://img.skitch.com/20110303-gj7p1qyb984s1yjn1takdfsid7.medium.jpg)
-
-![Screenshot 2](http://img.skitch.com/20110303-pufurh8rw42kin8h2jgjxu1nee.medium.jpg)
-
-![Screenshot 3](http://img.skitch.com/20110303-q2bqemgwccnfqdtt7shimguwm7.medium.jpg) 
-
-![Screenshot 4](http://img.skitch.com/20110401-c5fx2ccgb1bg64ydhfemurqqch.medium.jpg) 
