@@ -1,7 +1,7 @@
 $(document).ready(function() {
     
     // modify thumbnail links and add filename to url to support fancybox preview
-    $("div.journal a.thumbnail").attr('href', function(i, v){
+    $("div.wiki a.thumbnail").attr('href', function(i, v){
       return v + '/' + $(this).attr('title');
     });
     
@@ -15,7 +15,7 @@ $(document).ready(function() {
 	  "div.journal ul.details a[href$='.JPEG']," +
 	  "div.journal ul.details a[href$='.gif']," +
 	  "div.journal ul.details a[href$='.GIF']," +
-	  "div.journal a.thumbnail," +
+	  "div.wiki a.thumbnail," +
 	  "div.attachments a.swf").fancybox({
 			prevEffect		: 'none',
 			nextEffect		: 'none',
