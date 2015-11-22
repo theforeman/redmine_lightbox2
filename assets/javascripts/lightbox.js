@@ -21,7 +21,6 @@ $(document).ready(function() {
 			nextEffect		: 'none',
 			openSpeed		: 400,
 			closeSpeed		: 200
-			}
 		});
 
     $("div.attachments a.pdf").fancybox({
