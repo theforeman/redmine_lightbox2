@@ -5,6 +5,11 @@ $(document).ready(function() {
       return v + '/' + $(this).attr('title');
     });
     
+    // add rel attribute to thumbnails of the same journal entry
+    $("div.journal div.thumbnails a").attr('rel', function(i, v){
+      return 'thumbnails-' + $(this).closest('div.journal').attr('id');
+    });
+    
 	$("div.attachments a.lightbox," +
       "div.attachments a.lightbox_preview," +
 	  "div.journal ul.details a[href$='.png']," +
@@ -15,6 +20,7 @@ $(document).ready(function() {
 	  "div.journal ul.details a[href$='.JPEG']," +
 	  "div.journal ul.details a[href$='.gif']," +
 	  "div.journal ul.details a[href$='.GIF']," +
+	  "div.journal div.thumbnails a," +
 	  "div.wiki a.thumbnail," +
 	  "div.attachments a.swf," +
 	  ".avatar a").fancybox({
