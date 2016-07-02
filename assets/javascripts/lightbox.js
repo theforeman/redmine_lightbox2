@@ -1,15 +1,25 @@
 $(document).ready(function() {
-    
-    // modify thumbnail links and add filename to url to support fancybox preview
+
+    // modify thumbnail links in wiki content -> add filename to url to support fancybox preview
     $("div.wiki a.thumbnail").attr('href', function(i, v){
-      return v + '/' + $(this).attr('title');
+      return v + '/' + $(this).attr('title').replace(/(.*\.[^.]*)\s\(.*\)/g,'$1');
     });
-    
+
+    // modify thumbnails and magnifier links in journal details -> add filename to url to support fancybox preview
+    $("div.journal div.thumbnails a, div.journal ul.details li a.icon-magnifier").attr('href', function(i, v){
+      return v.replace(/\/attachments\/(\d+)/g,'/attachments/download/$1');
+    });
+
+    // add rel attribute to detail links of the same journal entry
+    $("div.journal ul.details li a.icon-magnifier").attr('rel', function(i, v){
+      return 'image-details-' + $(this).closest('div.journal').attr('id');
+    });
+
     // add rel attribute to thumbnails of the same journal entry
     $("div.journal div.thumbnails a").attr('rel', function(i, v){
       return 'thumbnails-' + $(this).closest('div.journal').attr('id');
     });
-    
+
 	$("div.attachments a.lightbox," +
       "div.attachments a.lightbox_preview," +
 	  "div.journal ul.details a[href$='.png']," +
@@ -26,15 +36,15 @@ $(document).ready(function() {
 	  ".avatar a").fancybox({
 			prevEffect		: 'none',
 			nextEffect		: 'none',
-			openSpeed		: 400,
-			closeSpeed		: 200
+			openSpeed		: 300,
+			closeSpeed		: 150
 		});
 
     $("div.attachments a.pdf").fancybox({
 			prevEffect		: 'none',
 			nextEffect		: 'none',
-			openSpeed		: 400,
-			closeSpeed		: 200,
+			openSpeed		: 300,
+			closeSpeed		: 150,
 			width			: '90%',
 			height			: '90%',
 			autoSize		: true,
