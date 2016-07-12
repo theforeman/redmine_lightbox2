@@ -2,7 +2,7 @@ $(document).ready(function() {
 
     // modify thumbnail links in wiki content -> add filename to url to support fancybox preview
     $("div.wiki a.thumbnail").attr('href', function(i, v){
-      return v + '/' + $(this).attr('title').replace(/(.*\.[^.]*)\s\(.*\)/g,'$1');
+      return v.replace(/\/attachments\/(\d+)/g,'/attachments/download/$1') + '/' + $(this).attr('title').replace(/(.*\.[^.]*)\s\(.*\)/g,'$1');
     });
 
     // modify thumbnails and magnifier links in journal details -> add filename to url to support fancybox preview
