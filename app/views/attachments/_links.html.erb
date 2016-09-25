@@ -22,7 +22,7 @@
                 :class => 'icon-only icon-magnifier lightbox_preview ' + attachment.filename.split('.').last.downcase,
                 :rel => 'attachments', :title => "#{attachment.filename}#{ (' - ' + attachment.description) unless attachment.description.blank? }" %>
   <% end %>
-  <% if( attachment.filename =~ /.(pdf|swf)$/i ) %>
+  <% if attachment.is_pdf? %>
     <%= link_to l(:button_view),
                 { :controller => 'attachments', :action => 'download_inline',
                   :id => attachment, :filename => attachment.filename },
