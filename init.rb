@@ -9,7 +9,7 @@ Redmine::Plugin.register :redmine_lightbox2 do
   description 'This plugin lets you preview image, pdf and swf attachments in a lightbox.'
   version '0.3.2'
   url 'https://github.com/paginagmbh/redmine_lightbox2'
-  requires_redmine :version_or_higher => '3.3.0'
+  requires_redmine :version_or_higher => '3.2.0'
 end
 
 

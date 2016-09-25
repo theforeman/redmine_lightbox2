@@ -54,7 +54,7 @@
         <%=
           link_to image_tag(url_for(:controller => 'attachments', :action => 'thumbnail', :id => attachment)),
           {:controller => 'attachments', :action => 'download', :id => attachment, :filename => attachment.filename},
-          :class => 'lightbox', :rel => 'thumbnails', :title => "#{attachment.filename}#{ ('-' + attachment.description) unless attachment.description.blank? }"
+          :class => ('lightbox' + (attachment.is_pdf? ? ' pdf' : '')) , :rel => 'thumbnails', :title => "#{attachment.filename}#{ ('-' + attachment.description) unless attachment.description.blank? }"
         %>
       </div>
     <% end %>
