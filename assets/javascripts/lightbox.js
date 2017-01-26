@@ -1,8 +1,8 @@
 $(document).ready(function() {
-    
-    // modify thumbnail links and add filename to url to support fancybox preview
+
+    // modify thumbnail links in wiki content -> add filename from ./img/@alt to url to support fancybox preview
     $("div.wiki a.thumbnail").attr('href', function(i, v){
-      return v.replace(/\/attachments\/(\d+)/g,'/attachments/download/$1') + '/' + $(this).attr('title').replace(/(.*\.[^.]*)\s\(.*\)/g,'$1');
+      return v.replace(/\/attachments\/(\d+)/g,'/attachments/download/$1') + '/' + $(this).children('img').attr('alt').replace(/(.*\.(png|jp(e)?g|gif))(\s\(.*\))?/g,'$1');
     });
     
     // add rel attribute to thumbnails of the same journal entry
