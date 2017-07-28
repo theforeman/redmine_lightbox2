@@ -1,3 +1,11 @@
+div.attachments table .size {
+  font-size: 0.9em;
+  color: #888;
+}
+div.attachments table td.alignrigth {
+  text-align: right;
+}
+
 div.attachments div.images {
   border: 1px solid #CCCCCC;
 	padding: 5px;
@@ -23,13 +31,13 @@ a.lightbox_preview img  {
 
 /* move prev/next buttons outside
  * fixes issue #5
- * 
+ *
  * source:
  * - http://fancyapps.com/fancybox/#useful
  * - http://jsfiddle.net/Xh3B2/
  */
 .fancybox-nav {
-    width: 70px;       
+    width: 70px;
 }
 .fancybox-nav span {
     visibility: visible;
