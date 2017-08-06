@@ -20,6 +20,16 @@ $(document).ready(function() {
       return 'thumbnails-' + $(this).closest('div.journal').attr('id');
     });
 
+    // #40 DMSF support: add class="thumbnail" to DMSF macro thumbnails
+    $("a[data-downloadurl][href^='/dmsf/files/'][href$='/view']").each(function(i, obj) {
+      $(this).attr('class', 'thumbnail')
+        .attr('data-fancybox-type', 'image')
+        .attr('title', $(this).attr('data-downloadurl').split(':')[1])
+        .removeAttr('target')
+        .removeAttr('data-downloadurl');
+    });
+
+    // Add Fancybox to image links
 	$("div.attachments a.lightbox," +
       "div.attachments a.lightbox_preview," +
 	  "div.journal ul.details a[href$='.png']," +
@@ -40,6 +50,7 @@ $(document).ready(function() {
 			closeSpeed		: 150
 		});
 
+    // Add Fancybox to PDF links
     $("div.attachments a.pdf").fancybox({
 			prevEffect		: 'none',
 			nextEffect		: 'none',
