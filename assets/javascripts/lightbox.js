@@ -7,7 +7,7 @@ $(document).ready(function() {
 
   // modify thumbnails and magnifier links in journal details -> add filename to url to support fancybox preview
   $("div.journal div.thumbnails a, div.journal ul.details li a:not([title])").attr('href', function(i, v){
-    if($(this).attr('href').match(/(png|jp?eg|gif|pdf)$/i)) {
+    if($(this).attr('href').match(/(png|jpe?g|gif|pdf)$/i)) {
       return v.replace(/\/attachments\/(\d+)/g,'/attachments/download/$1');
     } else {
       return v;
@@ -16,7 +16,7 @@ $(document).ready(function() {
 
   // add a magnifier icon before download icon for images and pdf
   $("div.journal ul.details li a.icon-download").each(function(i, obj) {
-    if($(this).attr('href').match(/\.(png|jp?eg|gif|pdf)$/i)) {
+    if($(this).attr('href').match(/\.(png|jpe?g|gif|pdf)$/i)) {
       var icon = $(this).clone().attr('class', function(i, v){
         return v.replace(/-download/g,'-magnifier');
       });
