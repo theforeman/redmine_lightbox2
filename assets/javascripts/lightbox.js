@@ -1,4 +1,6 @@
 $(document).ready(function() {
+  // the file extension regex matching on supported image and pdf types
+  var extensionRegex = /\.(png|jpe?g|gif|pdf)$/i;
 
     // modify thumbnail links in wiki content -> add filename from ./img/@alt to url to support fancybox preview
     $("div.wiki a.thumbnail").attr('href', function(i, v){
@@ -22,11 +24,18 @@ $(document).ready(function() {
 
     // #40 DMSF support: add class="thumbnail" to DMSF macro thumbnails
     $("a[data-downloadurl][href^='/dmsf/files/'][href$='/view']").each(function(i, obj) {
-      $(this).attr('class', 'thumbnail')
-        .attr('data-fancybox-type', 'image')
-        .attr('title', $(this).attr('data-downloadurl').split(':')[1])
-        .removeAttr('target')
-        .removeAttr('data-downloadurl');
+      var filename = $(this).attr('data-downloadurl').split(':')[1];
+      // Also support PDF preview in lightbox
+      var isPdf = filename.match(/\.pdf$/i);
+      // Bugfix: only apply thumbnail class to image and pdf links
+      if(filename.match(extensionRegex)) {
+        $(this)
+          .attr('class', 'thumbnail')
+          .attr('data-fancybox-type', isPdf ? 'iframe' : 'image')
+          .attr('title', filename)
+          .removeAttr('target')
+          .removeAttr('data-downloadurl');
+      }
     });
 
     // Add Fancybox to image links
