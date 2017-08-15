@@ -1,4 +1,6 @@
 $(document).ready(function() {
+  // the file extension regex matching on supported image and pdf types
+  var extensionRegex = /\.(png|jpe?g|gif|pdf)$/i;
 
   // modify thumbnail links in wiki content -> add filename from ./img/@alt to url to support fancybox preview
   $("div.wiki a.thumbnail").attr('href', function(i, v){
@@ -7,7 +9,7 @@ $(document).ready(function() {
 
   // modify thumbnails and magnifier links in journal details -> add filename to url to support fancybox preview
   $("div.journal div.thumbnails a, div.journal ul.details li a:not([title])").attr('href', function(i, v){
-    if($(this).attr('href').match(/(png|jpe?g|gif|pdf)$/i)) {
+    if($(this).attr('href').match(extensionRegex)) {
       return v.replace(/\/attachments\/(\d+)/g,'/attachments/download/$1');
     } else {
       return v;
@@ -16,7 +18,7 @@ $(document).ready(function() {
 
   // add a magnifier icon before download icon for images and pdf
   $("div.journal ul.details li a.icon-download").each(function(i, obj) {
-    if($(this).attr('href').match(/\.(png|jpe?g|gif|pdf)$/i)) {
+    if($(this).attr('href').match(extensionRegex)) {
       var icon = $(this).clone().attr('class', function(i, v){
         return v.replace(/-download/g,'-magnifier');
       });
@@ -31,11 +33,18 @@ $(document).ready(function() {
 
   // #40 DMSF support: add class="thumbnail" to DMSF macro thumbnails
   $("a[data-downloadurl][href^='/dmsf/files/'][href$='/view']").each(function(i, obj) {
-    $(this).attr('class', 'thumbnail')
-      .attr('data-fancybox-type', 'image')
-      .attr('title', $(this).attr('data-downloadurl').split(':')[1])
-      .removeAttr('target')
-      .removeAttr('data-downloadurl');
+    var filename = $(this).attr('data-downloadurl').split(':')[1];
+    // Also support PDF preview in lightbox
+    var isPdf = filename.match(/\.pdf$/i);
+    // Bugfix: only apply thumbnail class to image and pdf links
+    if(filename.match(extensionRegex)) {
+      $(this)
+        .attr('class', 'thumbnail')
+        .attr('data-fancybox-type', isPdf ? 'iframe' : 'image')
+        .attr('title', filename)
+        .removeAttr('target')
+        .removeAttr('data-downloadurl');
+    }
   });
 
   // Add Fancybox to image links
