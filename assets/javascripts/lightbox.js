@@ -32,11 +32,11 @@ $(document).ready(function() {
   });
 
   // #40 DMSF support: add class="thumbnail" to DMSF macro thumbnails
-  $("a[data-downloadurl][href^='/dmsf/files/'][href$='/view']").each(function(i, obj) {
+  $("div.wiki a[data-downloadurl][href^='/dmsf/files/'][href$='/view']").each(function(i, obj) {
     var filename = $(this).attr('data-downloadurl').split(':')[1];
     // Also support PDF preview in lightbox
     var isPdf = filename.match(/\.pdf$/i);
-    // Bugfix: only apply thumbnail class to image and pdf links
+    // only apply thumbnail class to image and pdf links
     if(filename.match(extensionRegex)) {
       $(this)
         .attr('class', 'thumbnail')
@@ -44,6 +44,33 @@ $(document).ready(function() {
         .attr('title', filename)
         .removeAttr('target')
         .removeAttr('data-downloadurl');
+    }
+  });
+
+  // #53 DMSF support in issues: add class="lightbox" to DMSF thumbnails and preview links
+  $("div.attachments.dmsf_parent_container a[href^='/dmsf/files/'][href$='/view']").each(function(i, obj) {
+    // extract filename from attribute 'data-downloadurl' from closest element with the same 'href'
+    var href = $(this).attr('href');
+    var filename = $("div.attachments.dmsf_parent_container > p > a[href='" + href + "'].dmsf-icon-file").first().attr('data-downloadurl').split(':')[1];
+    // create 3 fancybox 'rel' groups to avoid image duplicates in slideshow
+    var relgroup = '';
+    if($(this).closest('div.thumbnails').length) {
+      relgroup = 'thumbnails';
+    } else if($(this).hasClass('icon-only')) {
+      relgroup = 'icon';
+    } else if($(this).hasClass('thumbnail')) {
+      relgroup = 'imagelink';
+    }
+    // Also support PDF preview in lightbox
+    var isPdf = filename.match(/\.pdf$/i);
+    // only apply thumbnail class to image and pdf links
+    if(filename.match(extensionRegex)) {
+      $(this)
+        .addClass('lightbox')
+        .attr('data-fancybox-type', isPdf ? 'iframe' : 'image')
+        .attr('title', filename)
+        .attr('rel', 'dmsf-' + relgroup);
+        // do not remove 'data-downloadurl' here otherwise the filename extraction crashes for following dmsf thumbnails
     }
   });
 
