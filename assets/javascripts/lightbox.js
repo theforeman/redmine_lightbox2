@@ -81,7 +81,7 @@ $(document).ready(function() {
   .add("div.journal ul.details a:not(.icon-download)").filter((index,elem) => $(elem).attr('href').match(extensionRegexImage))
   .add("div.journal div.thumbnails a")
   .add("div.wiki a.thumbnail")
-  .add("avatar a")
+  .add(".avatar a")
   .fancybox({
     prevEffect    : 'none',
     nextEffect    : 'none',
