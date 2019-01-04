@@ -4,6 +4,7 @@ module RedmineLightbox2
       def view_layouts_base_html_head(context={})
         if context[:controller] && (  context[:controller].is_a?(IssuesController) ||
                                       (Object.const_defined?('ContactsController') && context[:controller].is_a?(ContactsController)) ||
+                                      (Object.const_defined?('ArticlesController') && context[:controller].is_a?(ArticlesController)) ||
                                       context[:controller].is_a?(WikiController) ||
                                       context[:controller].is_a?(DocumentsController) ||
                                       context[:controller].is_a?(FilesController) ||
