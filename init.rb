@@ -10,7 +10,7 @@ Redmine::Plugin.register :redmine_lightbox2 do
   version '0.4.3'
   url 'https://github.com/paginagmbh/redmine_lightbox2'
   author_url 'https://github.com/tofi86'
-  requires_redmine :version_or_higher => '3.4'
+  requires_redmine :version => '3.4'
 end
 
 
