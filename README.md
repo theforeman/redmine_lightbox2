@@ -11,7 +11,9 @@ This is a fork of zipme's [redmine_lightbox](https://github.com/zipme/redmine_li
 Compatibility
 -------------
 
-**The latest version on `master` branch supports Redmine 3.4 only!**
+**The latest version on `master` branch supports Redmine 4.0 only!**
+
+A Redmine 3.4.x compatible version can be found in the [redmine-3.4](https://github.com/paginagmbh/redmine_lightbox2/tree/redmine-3.4) branch.
 
 A Redmine 3.3.x compatible version can be found in the [redmine-3.3](https://github.com/paginagmbh/redmine_lightbox2/tree/redmine-3.3) branch.
 

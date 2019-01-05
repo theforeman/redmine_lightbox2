@@ -79,8 +79,9 @@
 	<% unless images.empty? %>
 	  <div class='images'>
 	    <% images.each do |attachment| %>
-	      <%= link_to image_tag(url_for({:controller => 'attachments', :action => 'download', :id => attachment, :filename => attachment.filename }), :width => '180'),
-	      {:controller => 'attachments', :action => 'download', :id => attachment, :filename => attachment.filename }, :class => 'lightbox', :rel => 'thumbnails', :title => "#{attachment.filename}#{ ('-' + attachment.description) unless attachment.description.blank? }" %>
+	      <%= link_to image_tag(url_for({:controller => 'attachments', :action => 'download', :id => attachment, :filename => attachment.filename }), :width => Setting.thumbnails_size),
+	      {:controller => 'attachments', :action => 'download', :id => attachment, :filename => attachment.filename },
+        :class => 'lightbox', :rel => 'thumbnails', :title => "#{attachment.filename}#{ ('-' + attachment.description) unless attachment.description.blank? }" %>
 	    <% end -%>
 	  </div>
 	<% end -%>

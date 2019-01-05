@@ -8,10 +8,19 @@ $(document).ready(function() {
     return v.replace(/\/attachments\/(\d+)/g,'/attachments/download/$1') + '/' + $(this).children('img').attr('alt').replace(/(.*\.(png|jpe?g|gif|bmp))(\s\(.*\))?/gi,'$1');
   });
 
-  // modify thumbnails and magnifier links in journal details -> add filename to url to support fancybox preview
-  $("div.journal div.thumbnails a, div.journal ul.details li a:not([title])").attr('href', function(i, v){
-    if($(this).attr('href').match(extensionRegexAll)) {
-      return v.replace(/\/attachments\/(\d+)/g,'/attachments/download/$1');
+  // modify filename links in journal details -> add filename to url to support fancybox preview
+  $("div.journal ul.details li a:not([title])").attr('href', function(i, v){
+    if($(this).html().match(extensionRegexAll)) {
+      return v.replace(/\/attachments\/(\d+)/g,'/attachments/download/$1') + '/' + $(this).html();
+    } else {
+      return v;
+    }
+  });
+
+  // modify thumbnail links after journal details -> add filename to url to support fancybox preview
+  $("div.journal div.thumbnails a[title]").attr('href', function(i, v){
+    if($(this).attr('title').match(extensionRegexAll)) {
+      return v.replace(/\/attachments\/(\d+)/g,'/attachments/download/$1') + '/' + $(this).attr('title');
     } else {
       return v;
     }
