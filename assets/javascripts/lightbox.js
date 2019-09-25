@@ -31,7 +31,7 @@ $(document).ready(function() {
     if($(this).attr('href').match(extensionRegexAll)) {
       var icon = $(this).clone().attr('class', function(i, v){
         return v.replace(/-download/g,'-magnifier');
-      });
+      }).removeAttr('title');
       icon.insertBefore($(this));
     }
   });
