@@ -37,8 +37,11 @@ $(document).ready(function() {
   });
 
   // add rel attribute to thumbnails of the same journal entry
-  $("div.journal div.thumbnails a").attr('rel', function(i, v){
-    return 'thumbnails-' + $(this).closest('div.journal').attr('id');
+  $("div.journal div.thumbnails a").each(function(i, obj) {
+    var relgroup = 'thumbnails-' + $(this).closest('div.journal').attr('id')
+    $(this)
+      .attr('rel', relgroup)
+      .attr('data-fancybox', relgroup)
   });
 
   // #40 DMSF support: add class="thumbnail" to DMSF macro thumbnails
@@ -50,8 +53,9 @@ $(document).ready(function() {
     if(filename.match(extensionRegexAll)) {
       $(this)
         .attr('class', 'thumbnail')
-        .attr('data-fancybox-type', isPdf ? 'iframe' : 'image')
+        .attr('data-type', isPdf ? 'iframe' : 'image')
         .attr('title', filename)
+        .attr('data-caption', filename)
         .removeAttr('target')
         .removeAttr('data-downloadurl');
     }
@@ -77,9 +81,10 @@ $(document).ready(function() {
     if(filename.match(extensionRegexAll)) {
       $(this)
         .addClass('lightbox')
-        .attr('data-fancybox-type', isPdf ? 'iframe' : 'image')
+        .attr('data-type', isPdf ? 'iframe' : 'image')
         .attr('title', filename)
-        .attr('rel', 'dmsf-' + relgroup);
+        .attr('data-caption', filename)
+        .attr('data-fancybox', 'dmsf-' + relgroup);
         // do not remove 'data-downloadurl' here otherwise the filename extraction crashes for following dmsf thumbnails
     }
   });
@@ -92,10 +97,17 @@ $(document).ready(function() {
   .add("div.wiki a.thumbnail")
   .add(".avatar a")
   .fancybox({
-    prevEffect    : 'none',
-    nextEffect    : 'none',
-    openSpeed     : 300,
-    closeSpeed    : 150
+    animationEffect    : 'zoom',
+    animationDuration  : 200,
+    transitionEffect   : 'fade',
+    transitionDuration : 200,
+    buttons: [
+      'zoom',
+      'fullScreen',
+      'download',
+      'thumbs',
+      'close'
+    ]
   });
 
   // Add Fancybox to PDF links
@@ -103,16 +115,18 @@ $(document).ready(function() {
   .add("div.journal ul.details a:not(.icon-download)").filter((index,elem) => $(elem).attr('href').match(/\.pdf$/i))
   .add("div.journal div.thumbnails a").filter((index,elem) => $(elem).attr('href').match(/\.pdf$/i))
   .fancybox({
-    type          : 'iframe',
-    prevEffect    : 'none',
-    nextEffect    : 'none',
-    openSpeed     : 300,
-    closeSpeed    : 150,
-    width         : '90%',
-    height        : '90%',
-    autoSize      : true,
+    animationEffect    : 'zoom',
+    animationDuration  : 200,
+    transitionEffect   : 'fade',
+    transitionDuration : 200,
+    type               : 'iframe',
     iframe : {
-      preload: false
-    }
+      preload: true
+    },
+    buttons: [
+      'fullScreen',
+      'download',
+      'close'
+    ]
   });
 });
