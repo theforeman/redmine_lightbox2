@@ -1,4 +1,4 @@
-/*! fancyBox v2.1.5 fancyapps.com | fancyapps.com/fancybox/#license */
+/*! fancyBox v2.1.7 fancyapps.com | fancyapps.com/fancybox/#license */
 .fancybox-wrap,
 .fancybox-skin,
 .fancybox-outer,
@@ -21,6 +21,8 @@
 	position: absolute;
 	top: 0;
 	left: 0;
+	-webkit-transform: translate3d(0, 0, 0);
+	transform: translate3d(0, 0, 0);
 	z-index: 8020;
 }
 
@@ -156,7 +158,6 @@
 	position: absolute;
 	top: -99999px;
 	left: -99999px;
-	visibility: hidden;
 	max-width: 99999px;
 	max-height: 99999px;
 	overflow: visible !important;
@@ -165,7 +166,7 @@
 /* Overlay helper */
 
 .fancybox-lock {
-    overflow: hidden !important;
+    overflow: visible !important;
     width: auto;
 }
 
