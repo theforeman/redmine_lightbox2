@@ -32,17 +32,36 @@ $(document).ready(function() {
     return 'thumbnails-' + $(this).closest('div.journal').attr('id');
   });
 
-  // #40 DMSF support: add class="thumbnail" to DMSF macro thumbnails
-  $("div.wiki a[data-downloadurl][href^='/dmsf/files/'][href$='/view']").each(function(i, obj) {
+
+  // DMSF support
+  var dmsf_link_selector = "a[data-downloadurl][href^='/dmsf/files/'][href$='/view']";
+
+  // #40 ... add class="thumbnail" to DMSF macro thumbnails on wiki pages
+  $("div.wiki " + dmsf_link_selector).each(function(i, obj) {
     var filename = $(this).attr('data-downloadurl').split(':')[1];
     // Also support PDF preview in lightbox
     var isPdf = filename.match(/\.pdf$/i);
     // only apply thumbnail class to image and pdf links
     if(filename.match(extensionRegexAll)) {
       $(this)
-        .attr('class', 'thumbnail')
+        .addClass('thumbnail')
         .attr('data-fancybox-type', isPdf ? 'iframe' : 'image')
         .attr('title', filename)
+        .removeAttr('target')
+        .removeAttr('data-downloadurl');
+    }
+  });
+
+  // #63 ... add class="lightbox" to DMSF image links in DMS browser
+  $(".controller-dmsf #browser .dmsf_title " + dmsf_link_selector).each(function(i, obj) {
+    var filename = $(this).attr('data-downloadurl').split(':')[1];
+    // only apply thumbnail class to image and pdf links
+    if(filename.match(extensionRegexImage)) {
+      $(this)
+        .addClass('lightbox')
+        .attr('data-fancybox-type', 'image')
+        .attr('title', filename)
+        .attr('rel', 'dmsf-browser')
         .removeAttr('target')
         .removeAttr('data-downloadurl');
     }
@@ -75,12 +94,14 @@ $(document).ready(function() {
     }
   });
 
+
   // Add Fancybox to image links
   $("div.attachments a.lightbox")
   .add("div.attachments a.lightbox_preview")
   .add("div.journal ul.details a:not(.icon-download)").filter((index,elem) => $(elem).attr('href').match(extensionRegexImage))
   .add("div.journal div.thumbnails a")
   .add("div.wiki a.thumbnail")
+  .add(".controller-dmsf #browser a.lightbox")
   .add(".avatar a")
   .fancybox({
     prevEffect    : 'none',
