@@ -114,7 +114,7 @@ $(document).ready(function() {
   // Add Fancybox to image links
   $("div.attachments a.lightbox")
   .add("div.attachments a.lightbox_preview")
-  .add("div.journal ul.details a:not(.icon-download)").filter(function(index,elem) { return $(elem).attr('href').match(extensionRegexImage) })
+  .add( $("div.journal ul.details a:not(.icon-download)").filter(function(index,elem) { return $(elem).attr('href').match(extensionRegexImage) }) )
   .add("div.journal div.thumbnails a")
   .add("div.wiki a.thumbnail")
   .add(".controller-dmsf #browser a.lightbox")
@@ -128,8 +128,8 @@ $(document).ready(function() {
 
   // Add Fancybox to PDF links
   $("div.attachments a.pdf")
-  .add("div.journal ul.details a:not(.icon-download)").filter(function(index,elem) { return $(elem).attr('href').match(/\.pdf$/i) })
-  .add("div.journal div.thumbnails a").filter(function(index,elem) { return $(elem).attr('href').match(/\.pdf$/i) })
+  .add( $("div.journal ul.details a:not(.icon-download)").filter(function(index,elem) { return $(elem).attr('href').match(/\.pdf$/i) }) )
+  .add( $("div.journal div.thumbnails a").filter(function(index,elem) { return $(elem).attr('href').match(/\.pdf$/i) }) )
   .fancybox({
     type          : 'iframe',
     prevEffect    : 'none',
