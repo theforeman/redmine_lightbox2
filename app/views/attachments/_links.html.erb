@@ -10,6 +10,7 @@
 
 <table>
 <% for attachment in attachments %>
+<% caption = "#{attachment.filename}#{ (' - ' + attachment.description) unless attachment.description.blank? }" %>
 <tr>
   <td>
     <% if attachment.is_image? %>
@@ -19,11 +20,11 @@
       <%= link_to l(:button_view),
                   { :controller => 'attachments', :action => 'download', :id => attachment, :filename => attachment.filename },
                   :class => 'icon-only icon-magnifier lightbox_preview ' + attachment.filename.split('.').last.downcase,
-                  :rel => 'attachments', :title => "#{attachment.filename}#{ (' - ' + attachment.description) unless attachment.description.blank? }",
+                  :rel => 'attachments', :title => l(:label_preview),
                   :data  => {
                     :type => 'image',
                     :fancybox => 'attachments',
-                    :caption => "#{attachment.filename}#{ (' - ' + attachment.description) unless attachment.description.blank? }"
+                    :caption => caption
                   } %>
 
     <% elsif attachment.is_pdf? %>
@@ -33,11 +34,11 @@
       <%= link_to l(:button_view),
                   { :controller => 'attachments', :action => 'download_inline', :id => attachment, :filename => attachment.filename },
                   :class => 'icon-only icon-magnifier lightbox_preview pdf',
-                  :rel => 'attachments', :title => "#{attachment.filename}#{ (' - ' + attachment.description) unless attachment.description.blank? }",
+                  :rel => 'attachments', :title => l(:label_preview),
                   :data  => {
                     :type => 'iframe',
                     :fancybox => 'attachments',
-                    :caption => "#{attachment.filename}#{ (' - ' + attachment.description) unless attachment.description.blank? }"
+                    :caption => caption
                   } %>
 
     <% else %>
@@ -74,15 +75,16 @@
   <% if images.any? %>
   <div class="thumbnails images">
     <% images.each do |attachment| %>
+      <% caption = "#{attachment.filename}#{ (' - ' + attachment.description) unless attachment.description.blank? }" %>
       <div>
         <%=
           link_to image_tag(url_for(:controller => 'attachments', :action => 'thumbnail', :id => attachment)),
           { :controller => 'attachments', :action => 'download', :id => attachment, :filename => attachment.filename },
-          :class => ('lightbox' + (attachment.is_pdf? ? ' pdf' : '')) , :rel => 'thumbnails', :title => "#{attachment.filename}#{ ('-' + attachment.description) unless attachment.description.blank? }",
+          :class => ('lightbox' + (attachment.is_pdf? ? ' pdf' : '')) , :rel => 'thumbnails', :title => l(:label_preview) + ': ' + caption,
           :data  => {
             :type => attachment.is_pdf? ? 'iframe' : 'image',
             :fancybox => 'thumbnails',
-            :caption => "#{attachment.filename}#{ (' - ' + attachment.description) unless attachment.description.blank? }"
+            :caption => caption
           }
         %>
       </div>
@@ -94,13 +96,14 @@
   <% unless images.empty? %>
     <div class='images'>
       <% images.each do |attachment| %>
+        <% caption = "#{attachment.filename}#{ (' - ' + attachment.description) unless attachment.description.blank? }" %>
         <%= link_to image_tag(url_for({:controller => 'attachments', :action => 'download', :id => attachment, :filename => attachment.filename }), :width => Setting.thumbnails_size),
           { :controller => 'attachments', :action => 'download', :id => attachment, :filename => attachment.filename },
-          :class => 'lightbox', :rel => 'thumbnails', :title => "#{attachment.filename}#{ ('-' + attachment.description) unless attachment.description.blank? }",
+          :class => 'lightbox', :rel => 'thumbnails', :title => l(:label_preview) + ': ' + caption,
           :data  => {
             :type => attachment.is_pdf? ? 'iframe' : 'image',
             :fancybox => 'thumbnails',
-            :caption => "#{attachment.filename}#{ (' - ' + attachment.description) unless attachment.description.blank? }"
+            :caption => caption
           }
         %>
       <% end -%>
