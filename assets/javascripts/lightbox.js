@@ -45,6 +45,24 @@ $(document).ready(function() {
   });
 
 
+  // #72 support for Files module
+  $("table.list.files td.filename a").each(function(i, obj) {
+    var href = $(this).attr('href');
+    var filename = $(this).text();
+    var title = $(this).attr('title');
+    // Also support PDF preview in lightbox
+    var isPdf = filename.match(/\.pdf$/i);
+    // only apply thumbnail class to image and pdf links
+    if(filename.match(extensionRegexAll)) {
+      $(this)
+        .attr('href', href.replace(/\/attachments\/(\d+)/g,'/attachments/download/$1/' + filename))
+        .addClass(isPdf ? 'lightbox pdf' : 'lightbox')
+        .attr('data-type', isPdf ? 'iframe' : 'image')
+        .attr('data-caption', title ? filename + ' - ' + title : filename);
+    }
+  });
+
+
   // DMSF support
   var dmsf_link_selector = "a[data-downloadurl][href^='/dmsf/files/'][href$='/view']";
 
@@ -135,6 +153,7 @@ $(document).ready(function() {
   .add("div.wiki a.thumbnail")
   .add(".controller-dmsf #browser a.lightbox")
   .add(".avatar a")
+  .add("table.list.files td.filename a.lightbox")
   .fancybox({
     animationEffect    : 'zoom',
     animationDuration  : 200,
@@ -151,6 +170,7 @@ $(document).ready(function() {
 
   // Add Fancybox to PDF links
   $("div.attachments a.pdf")
+  .add("table.list.files td.filename a.lightbox.pdf")
   .add( $("div.journal ul.details a:not(.icon-download)").filter(function(index,elem) { return $(elem).attr('href').match(/\.pdf$/i) }) )
   .add( $("div.journal div.thumbnails a").filter(function(index,elem) { return $(elem).attr('href').match(/\.pdf$/i) }) )
   .fancybox({
