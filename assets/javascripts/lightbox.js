@@ -89,6 +89,7 @@ $(document).ready(function() {
     // extract filename from attribute 'data-downloadurl' from closest element with the same 'href'
     var href = $(this).attr('href');
     var ddUrl = $(this).attr('data-downloadurl');
+    var dmsfId = href.replace(/.*\/files\/(\d+)\/view/g, '$1');
     var filename = "";
     var title = ""
 
@@ -121,7 +122,7 @@ $(document).ready(function() {
       $(this)
         .addClass('lightbox')
         .attr('data-fancybox-type', isPdf ? 'iframe' : 'image')
-        .attr('title', title)
+        .attr('title', "[" + dmsfId + "] " + title)
         .attr('rel', 'dmsf-' + relgroup);
         // do not remove 'data-downloadurl' here otherwise the filename extraction crashes for following dmsf thumbnails
     }
