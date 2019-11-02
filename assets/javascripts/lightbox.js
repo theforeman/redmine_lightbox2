@@ -46,7 +46,7 @@ $(document).ready(function() {
       $(this)
         .addClass('thumbnail')
         .attr('data-fancybox-type', isPdf ? 'iframe' : 'image')
-        .attr('title', filename)
+        .attr('title', $(this).text())
         .removeAttr('target')
         .removeAttr('data-downloadurl');
     }
@@ -60,7 +60,7 @@ $(document).ready(function() {
       $(this)
         .addClass('lightbox')
         .attr('data-fancybox-type', 'image')
-        .attr('title', filename)
+        .attr('title', $(this).text())
         .attr('rel', 'dmsf-browser')
         .removeAttr('target')
         .removeAttr('data-downloadurl');
@@ -71,7 +71,23 @@ $(document).ready(function() {
   $("div.attachments.dmsf_parent_container a[href^='/dmsf/files/'][href$='/view']").each(function(i, obj) {
     // extract filename from attribute 'data-downloadurl' from closest element with the same 'href'
     var href = $(this).attr('href');
-    var filename = $("div.attachments.dmsf_parent_container > p > a[href='" + href + "'].dmsf-icon-file").first().attr('data-downloadurl').split(':')[1];
+    var ddUrl = $(this).attr('data-downloadurl');
+    var filename = "";
+    var title = ""
+
+    // For some browsers, `attr` is undefined; for others, `attr` is false. Check for both.
+    // https://css-tricks.com/snippets/jquery/make-an-jquery-hasattr/
+    if (typeof ddUrl !== typeof undefined && ddUrl !== false) {
+      // read local attribute if present (on DMSF textlinks)
+      filename = ddUrl.split(':')[1];
+      title = $(this).text();
+    } else {
+      // or read from corresponding DMSF textlink if no local data-downloadurl is present
+      var correspondingElem = $("div.attachments.dmsf_parent_container > p > a[href='" + href + "'].dmsf-icon-file").first()
+      filename = correspondingElem.attr('data-downloadurl').split(':')[1];
+      title = correspondingElem.text();
+    }
+
     // create 3 fancybox 'rel' groups to avoid image duplicates in slideshow
     var relgroup = '';
     if($(this).closest('div.thumbnails').length) {
@@ -88,7 +104,7 @@ $(document).ready(function() {
       $(this)
         .addClass('lightbox')
         .attr('data-fancybox-type', isPdf ? 'iframe' : 'image')
-        .attr('title', filename)
+        .attr('title', title)
         .attr('rel', 'dmsf-' + relgroup);
         // do not remove 'data-downloadurl' here otherwise the filename extraction crashes for following dmsf thumbnails
     }
