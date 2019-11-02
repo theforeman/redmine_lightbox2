@@ -18,7 +18,9 @@ $(document).ready(function() {
   });
 
   // add a magnifier icon before download icon for images and pdf
-  $("div.journal ul.details li a.icon-download").each(function(i, obj) {
+  $("div.journal ul.details li a.icon-download")
+  .add("table.list.files a.icon-download")  // #72 also for 'files' module
+  .each(function(i, obj) {
     if($(this).attr('href').match(extensionRegexAll)) {
       var icon = $(this).clone().attr('class', function(i, v){
         return v.replace(/-download/g,'-magnifier');
@@ -129,6 +131,7 @@ $(document).ready(function() {
   // Add Fancybox to image links
   $("div.attachments a.lightbox")
   .add("div.attachments a.lightbox_preview")
+  .add("table.list.files a.icon-magnifier:not([href$='.pdf'])")
   .add( $("div.journal ul.details a:not(.icon-download)").filter(function(index,elem) { return $(elem).attr('href').match(extensionRegexImage) }) )
   .add("div.journal div.thumbnails a")
   .add("div.wiki a.thumbnail")
@@ -145,6 +148,7 @@ $(document).ready(function() {
   // Add Fancybox to PDF links
   $("div.attachments a.pdf")
   .add("table.list.files td.filename a.lightbox.pdf")
+  .add("table.list.files a.icon-magnifier[href$='.pdf']")
   .add( $("div.journal ul.details a:not(.icon-download)").filter(function(index,elem) { return $(elem).attr('href').match(/\.pdf$/i) }) )
   .add( $("div.journal div.thumbnails a").filter(function(index,elem) { return $(elem).attr('href').match(/\.pdf$/i) }) )
   .fancybox({
