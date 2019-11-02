@@ -109,7 +109,7 @@ $(document).ready(function() {
       relgroup = 'thumbnails';
     } else if($(this).hasClass('icon-only')) {
       relgroup = 'icon';
-    } else if($(this).hasClass('thumbnail')) {
+    } else if($(this).hasClass('icon')) {
       relgroup = 'imagelink';
     }
     // Also support PDF preview in lightbox
