@@ -41,9 +41,11 @@ $(document).ready(function() {
   // add rel attribute to thumbnails of the same journal entry
   $("div.journal div.thumbnails a").each(function(i, obj) {
     var relgroup = 'thumbnails-' + $(this).closest('div.journal').attr('id')
+    var title = $(this).attr('title');
     $(this)
       .attr('rel', relgroup)
       .attr('data-fancybox', relgroup)
+      .attr('data-caption', title);
   });
 
 
