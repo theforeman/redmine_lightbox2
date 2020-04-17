@@ -67,6 +67,24 @@ $(document).ready(function() {
   });
 
 
+  // #76 support for issue list attachment column
+  $("table.list.issues td.attachments a").each(function(i, obj) {
+    var href = $(this).attr('href');
+    var filename = $(this).text();
+    // Also support PDF preview in lightbox
+    var isPdf = filename.match(/\.pdf$/i);
+    // only apply thumbnail class to image and pdf links
+    if(filename.match(extensionRegexAll)) {
+      $(this)
+        .attr('href', href.replace(/\/attachments\/(\d+)/g,'/attachments/download/$1/' + filename))
+        .addClass(isPdf ? 'lightbox pdf' : 'lightbox')
+        .attr('data-type', isPdf ? 'iframe' : 'image')
+        .attr('data-fancybox', 'issue-list-attachments-' + $(this).closest('tr').attr('id'))
+        .attr('data-caption', filename);
+    }
+  });
+
+
   // DMSF support
   var dmsf_link_selector = "a[data-downloadurl][href^='/dmsf/files/'][href$='/view']";
 
