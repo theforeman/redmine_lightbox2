@@ -23,6 +23,7 @@ jobs:
           - '3.2'
         redmine:
           - '5.0-stable'
+          - '5.1-stable'
           - 'master'
         include:
           - ruby: '2.7'
