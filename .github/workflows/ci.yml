@@ -25,9 +25,6 @@ jobs:
           - '5.0-stable'
           - '5.1-stable'
           - 'master'
-        include:
-          - ruby: '2.7'
-            redmine: '4.2-stable'
         exclude:
           - ruby: '3.2'
             redmine: '5.0-stable'
@@ -62,6 +59,5 @@ jobs:
           RAILS_ENV: test
       - name: Run zeitwerk:check
         run: bundle exec rake zeitwerk:check
-        if: matrix.redmine != '4.2-stable'
         env:
           RAILS_ENV: test
